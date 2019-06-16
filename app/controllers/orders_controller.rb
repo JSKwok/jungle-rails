@@ -2,19 +2,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    # @line_item_product = @order.line_items.to_a.map do |line_item|
-
-    #   product_info = Product.find(line_item.product_id)
-    #   order_info = {
-    #     :price => line_item.total_price_cents,
-    #     :name => product_info.name,
-    #     :description => product_info.description,
-    #     :quantity => line_item.quantity,
-    #     :image => product_info.image.tiny
-    #   }
-    #   order_info
-    # end
-    # puts 'New array', @line_item_product
   end
 
   def create
@@ -24,6 +11,8 @@ class OrdersController < ApplicationController
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
+      UserMailer.receipt_email(order).deliver_now
+      puts ActionMailer::Base.deliveries.last
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end

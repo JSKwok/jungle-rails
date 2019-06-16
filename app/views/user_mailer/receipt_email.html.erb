@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello, </h1>
+    <p>
+      You have succesfully completed your order.
+    </p>
+    <p>
+      Order# : <%= @order.id%>
+      <% @order.line_items.each do |item| %>
+        Product: <%= item.product.name %>
+        Price:  <%= item.item_price %>
+        Quantity: <%= item.quantity %>
+        Total price: <%= item.total_price %>
+      <% end %>
+      Total  : <%= @order.total_cents / 100.0 %>
+    </p>
+    <p>Thanks for your purchase and have a great day!</p>
+  </body>
+</html>
