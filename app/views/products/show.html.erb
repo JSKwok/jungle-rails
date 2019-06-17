@@ -36,27 +36,38 @@
             <dd><%= review.description %></dd>
             <dt>Rating</dt>
             <dd><%= review.rating  %></dd>
+            <dt>Delete</dt>
+            <% if review.user == current_user %>
+              <dd>
+                <%= link_to 'Destroy Review', [review.product, review],
+                   method: :delete,
+                   data: { confirm: 'Are you sure?' }
+                %>
+              </dd>
+            <% end %>
           <% end %>
       </div>
 
-      <div class="col-sm-8">
-        <h2 class="write-review-header">Write a Review!</h2>
-        <%= form_for :review, url: product_reviews_path(@product, @review) do |review| %>
-          <p>
-            <%= review.label :rating %><br>
-            <%= review.select :rating, ['1', '2', '3', '4', '5']%>
-          </p>
+      <% if current_user %>
+        <div class="col-sm-8">
+          <h2 class="write-review-header">Write a Review!</h2>
+          <%= form_for :review, url: product_reviews_path(@product, @review) do |review| %>
+            <p>
+              <%= review.label :rating %><br>
+              <%= review.select :rating, ['1', '2', '3', '4', '5']%>
+            </p>
 
-          <p>
-            <%= review.label :description %><br>
-            <%= review.text_area :description %>
-          </p>
+            <p>
+              <%= review.label :description %><br>
+              <%= review.text_area :description %>
+            </p>
 
-          <p>
-            <%= review.submit %>
-          </p>
-        <% end %>
-      </div>
+            <p>
+              <%= review.submit %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
   </article>
