@@ -13,6 +13,7 @@
       </div>
 
       <div class="col-sm-8">
+        <h2 class="product-header">Product Information</h2>
         <dl class="dl-horizontal">
           <dt>Name</dt>
           <dd><%= @product.name %></dd>
@@ -23,6 +24,38 @@
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
         </dl>
+      </div>
+
+      <div class="col-sm-8">
+        <h2 class="reviews-header">Reviews</h2>
+        <dl class="dl-horizontal">
+          <% @product.review.each do |review| %>
+            <dt>Name</dt>
+            <dd><%= review.user.name %></dd>
+            <dt>Description</dt>
+            <dd><%= review.description %></dd>
+            <dt>Rating</dt>
+            <dd><%= review.rating  %></dd>
+          <% end %>
+      </div>
+
+      <div class="col-sm-8">
+        <h2 class="write-review-header">Write a Review!</h2>
+        <%= form_for :review, url: product_reviews_path(@product, @review) do |review| %>
+          <p>
+            <%= review.label :rating %><br>
+            <%= review.select :rating, ['1', '2', '3', '4', '5']%>
+          </p>
+
+          <p>
+            <%= review.label :description %><br>
+            <%= review.text_area :description %>
+          </p>
+
+          <p>
+            <%= review.submit %>
+          </p>
+        <% end %>
       </div>
     </div>
 

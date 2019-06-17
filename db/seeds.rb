@@ -132,5 +132,38 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+User.create!({
+  name: 'Billy Ray Cyrus',
+  email: 'billyraycyrus@hotmail.com',
+  password_digest: 'test'
+})
+
+User.create!({
+  name: 'Drake Bell',
+  email: 'test@test.com',
+  password_digest: 'test'
+})
+
+User.create!({
+  name: 'Josh Peck',
+  email: 'joshpeck@hotmail.com',
+  password_digest: 'test'
+})
+
+Review.create!({
+  product_id: 1,
+  user_id: 1,
+  description: 'Sick description brah',
+  rating: 5
+})
+
+Review.create!({
+  product_id: 2,
+  user_id: 1,
+  description: 'Some real shit',
+  rating: 5
+})
+
+
 
 puts "DONE!"
