@@ -29,7 +29,7 @@
       <div class="col-sm-8">
         <h2 class="reviews-header">Reviews</h2>
         <dl class="dl-horizontal">
-          <% @product.review.each do |review| %>
+          <% @product.review.reverse_each do |review| %>
             <dt>Name</dt>
             <dd><%= review.user.name %></dd>
             <dt>Description</dt>
